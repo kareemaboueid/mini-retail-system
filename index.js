@@ -1,7 +1,7 @@
 /*!
  * mini-retail-system
  * Copyright(c) 2024 Kareem Aboueid.
-*/
+ */
 
 import express from 'express';
 import morgan from 'morgan';
