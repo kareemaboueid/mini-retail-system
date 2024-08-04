@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 import MDL_USER from '../../models/user/user.model.js';
-import hlp_jsend from '../../../helpers/jsend.hlp.js'
+import hlp_jsend from '../../../helpers/jsend.hlp.js';
 
 /**
  * ### Controller: CTRL_USER_GET
@@ -9,7 +9,7 @@ import hlp_jsend from '../../../helpers/jsend.hlp.js'
  * @route `/v1/users/:username`
  */
 
-const CTRL_USER_GET= asyncHandler(async (_request, _response) => {
+const CTRL_USER_GET = asyncHandler(async (_request, _response) => {
   // ------ START ------ //
 
   try {
@@ -17,7 +17,10 @@ const CTRL_USER_GET= asyncHandler(async (_request, _response) => {
     const { username: eup_user_username } = _request.params;
 
     // check required fields:
-    _request.checkParams('username', 'Username is required').notEmpty();
+    if (!eup_user_username) {
+      _response.status(StatusCodes.BAD_REQUEST);
+      throw new Error('Username is required');
+    }
 
     // database user query (not freeze):
     const USER = await MDL_USER.findOne({
@@ -31,7 +34,7 @@ const CTRL_USER_GET= asyncHandler(async (_request, _response) => {
     }
 
     // send success response:
-    _response.status(StatusCodes.OK).json(hlp_jsend(StatusCodes.OK, USER ))
+    _response.status(StatusCodes.OK).json(hlp_jsend(StatusCodes.OK, USER));
 
     // ------ HANDLE ERRORS ------ //
   } catch (_error) {
