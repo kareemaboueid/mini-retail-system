@@ -1,6 +1,7 @@
 {
   "name": "mini-retail-system",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "server:dev": "NODE_ENV=development nodemon index.js",
     "server:build": "NODE_ENV=production nodemon index.js",
