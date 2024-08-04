@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import * as EmailValidator from 'email-validator';
-import {user} from '../../../database/structure.db.js';
+import { user } from '../../../database/structure.db.js';
 
 /** ### User schema */
 const SCH_USER = new mongoose.Schema(
@@ -11,31 +11,31 @@ const SCH_USER = new mongoose.Schema(
       type: String,
       required: [true, 'First name is required'],
       trim: true,
-      minLength: [2, 'First name is too short (minimum is 2 characters)'],
       maxLength: [50, 'First name is too long (maximum is 50 characters)'],
-},
+    },
 
     data_user_last_name: {
-  type: String,
+      type: String,
       required: [true, 'Last name is required'],
       trim: true,
-      minLength: [2, 'Last name is too short (minimum is 2 characters)'],
       maxLength: [50, 'Last name is too long (maximum is 50 characters)'],
-},
+    },
 
     data_user_email_address: {
-  type: String,
+      type: String,
       required: [true, 'Email address is required'],
       trim: true,
       lowercase: true,
       unique: true,
-       validate(_value) {
+      validate(_value) {
         if (!EmailValidator.validate(_value)) {
-          throw new Error('Invalid email address format, required format: `name@mail.com`');
+          throw new Error(
+            'Invalid email address format, required format: `name@mail.com`',
+          );
         }
       },
     },
-    
+
     data_user_phone_number: {
       type: String,
       required: [true, 'Phone number is required'],
@@ -48,7 +48,7 @@ const SCH_USER = new mongoose.Schema(
         if (!_value.startsWith('05')) {
           throw new Error('Invalid phone number format, required format: `05XXXXXXXX');
         }
-      }
+      },
     },
 
     data_user_job_position: {
@@ -56,7 +56,6 @@ const SCH_USER = new mongoose.Schema(
       required: [true, 'Job position is required'],
       trim: true,
       unique: true,
-      minLength: [2, 'Job position is too short (minimum is 2 characters)'],
       maxLength: [50, 'Job position is too long (maximum is 50 characters)'],
     },
 
@@ -64,9 +63,8 @@ const SCH_USER = new mongoose.Schema(
       type: String,
       required: [true, 'Nationallity is required'],
       trim: true,
-      minLength: [1, 'Nationallity is too short (minimum is 1 characters)'],
       maxLength: [50, 'Nationallity is too long (maximum is 50 characters)'],
-},
+    },
 
     data_user_civil_id: {
       index: true,
@@ -79,11 +77,13 @@ const SCH_USER = new mongoose.Schema(
       validate(_value) {
         if (this.data_user_nationallity === 'saudi') {
           if (!_value.startsWith('1')) {
-            throw new Error('Invalid civil ID format, should start with `1` for Saudi nationallity');
+            throw new Error(
+              'Invalid civil ID format, should start with `1` for Saudi nationallity',
+            );
           }
         }
-      }
-},
+      },
+    },
 
     data_user_username: {
       index: true,
@@ -92,14 +92,13 @@ const SCH_USER = new mongoose.Schema(
       trim: true,
       lowercase: true,
       unique: true,
-      minLength: [5, 'Username is too short (minimum is 5 characters)'],
       maxLength: [50, 'Username is too long (maximum is 50 characters)'],
-        validate(_value) {  
+      validate(_value) {
         if (/\s/.test(_value)) {
-    throw new Error('Username must not contain spaces');
-  }
+          throw new Error('Username must not contain spaces');
+        }
       },
-},
+    },
 
     data_user_password: {
       type: String,
@@ -107,15 +106,12 @@ const SCH_USER = new mongoose.Schema(
       trim: true,
       minLength: [1, 'Password is too short (minimum is 1 characters)'],
       maxLength: [50, 'Password is too long (maximum is 50 characters)'],
-},
-
+    },
 
     flag_user_freeze: {
       type: Boolean,
       default: false,
     },
-
- 
   },
 
   {
@@ -123,8 +119,7 @@ const SCH_USER = new mongoose.Schema(
     collection: user.coll,
   },
 
-  {toJSON: { virtuals: true },
-    toObject: { virtuals: true },}
+  { toJSON: { virtuals: true }, toObject: { virtuals: true } },
 
   // ------ END ------ //
 );
