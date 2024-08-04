@@ -44,4 +44,4 @@ The application is structured following the MVC pattern:
 ## Copyright
 
 - Copyright (c) 2024 [mini-retail-system](https://github.com/kareemaboueid/mini-retail-system) [Kareem Aboueid](https://github.com/kareemaboueid)
-- [MIT License](https://github.com/kareemaboueid/mini-retail-system/blob/main/LICENSE)
+- [MIT License](https://github.com/kareemaboueid/mini-retail-system/blob/master/LICENSE)
