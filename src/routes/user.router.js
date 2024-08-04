@@ -5,7 +5,7 @@ import CTRL_USER_CREATE from '../controllers/user/user_create.ctrl.js';
 import CTRL_USER_GET from '../controllers/user/user_get.ctrl.js';
 // import CTRL_USER_PASSWORD_UPDATE from '../controllers/user/user_password_update.ctrl.js';
 // import CTRL_USER_FREEZE from '../controllers/user/user_freeze.ctrl.js';
-// import authenticate_route from '../../middlewares/authenticate_route.mdwr';
+import authenticate_route from '../../middlewares/authenticate_route.mdwr.js';
 import { user } from '../../configs/endpoints.cnfg.js';
 
 /**
@@ -30,7 +30,7 @@ RT_USER.post(user.create, CTRL_USER_CREATE);
 // RT_USER.post(user.logout, CTRL_USER_LOGOUT);
 
 // GET /v1/users/:username
-RT_USER.get(user.username, authenticate_route,CTRL_USER_GET);
+RT_USER.get(user.username, authenticate_route, CTRL_USER_GET);
 
 // // PATCH /v1/users/:username?update=password
 // RT_USER.patch(user.username, authenticate_route,CTRL_USER_PASSWORD_UPDATE);
