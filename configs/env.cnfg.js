@@ -39,13 +39,13 @@ export {
    * @name DB_LOCAL_REAL
    * @description The real local database URI.
    */
-  DB_LOCAL_REAL,
+  DB_CLOUD_REAL,
 
   /**
    * @name DB_LOCAL_TEST
    * @description The test local database URI.
    */
-  DB_LOCAL_TEST,
+  DB_CLOUD_TEST,
 
   /**
    * @name DB_USERNAME
@@ -58,16 +58,4 @@ export {
    * @description The password for the cloud database.
    */
   DB_PASSWORD,
-
-  /**
-   * @name DB_CLOUD_REAL
-   * @description The real cloud database URI.
-   */
-  DB_CLOUD_REAL,
-
-  /**
-   * @name DB_CLOUD_TEST
-   * @description The test cloud database URI.
-   */
-  DB_CLOUD_TEST,
 };
