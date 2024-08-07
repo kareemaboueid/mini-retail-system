@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import * as EmailValidator from 'email-validator';
-import { company } from '../../../database/structure.db';
+import cnst_db_strings from '../../../constants/db_strings.cnst.js';
+
+const data = cnst_db_strings();
 
 /** ### Company schema */
 const SCH_COMPANY = new mongoose.Schema(
@@ -41,7 +43,7 @@ const SCH_COMPANY = new mongoose.Schema(
       },
     },
 
-    data_company_commercial_register: {
+    data_company_crn: {
       number: {
         type: String,
         trim: true,
@@ -56,18 +58,7 @@ const SCH_COMPANY = new mongoose.Schema(
       },
     },
 
-    data_company_unified_national_number: {
-      type: String,
-      trim: true,
-      minlength: [10, 'Unified national number must be 10 numbers'],
-      maxlength: [10, 'Unified national number must be 10 numbers'],
-      validate: {
-        validator: (v) => v.startsWith('7'),
-        message: (props) => `${props.value} is not a valid unified national number`,
-      },
-    },
-
-    data_company_tax_id_numbers: {
+    data_company_tin: {
       type: String,
       trim: true,
       minlength: [15, 'Tax ID number must be 15 numbers'],
@@ -78,29 +69,71 @@ const SCH_COMPANY = new mongoose.Schema(
       },
     },
 
-    data_company_email: {
+    data_company_unified_number: {
       type: String,
       trim: true,
+      minlength: [10, 'Unified national number must be 10 numbers'],
+      maxlength: [10, 'Unified national number must be 10 numbers'],
       validate: {
-        validator: (v) => EmailValidator.validate(v),
-        message: (props) => `${props.value} is not a valid email address`,
+        validator: (v) => v.startsWith('7'),
+        message: (props) => `${props.value} is not a valid unified national number`,
       },
     },
 
-    data_company_website: {
-      type: String,
-      trim: true,
-      validate: {
-        validator: (v) => v.startsWith('http'),
-        message: (props) => `${props.value} is not a valid website address`,
-      },
-    },
+    data_company_contact_info: {
+      email_addresses: [
+        {
+          type: String,
+          trim: true,
+          validate: {
+            validator: (v) => EmailValidator.validate(v),
+            message: (props) => `${props.value} is not a valid email address`,
+          },
+        },
+      ],
 
-    data_company_land_phone: {
-      type: String,
-      trim: true,
-      minlength: [10, 'Land phone must be 10 numbers'],
-      maxlength: [10, 'Land phone must be 10 numbers'],
+      websites: [
+        {
+          type: String,
+          trim: true,
+          validate: {
+            validator: (v) => v.startsWith('http'),
+            message: (props) => `${props.value} is not a valid website address`,
+          },
+        },
+      ],
+
+      land_phones: [
+        {
+          type: String,
+          trim: true,
+          minlength: [10, 'Land phone must be 10 numbers'],
+          maxlength: [10, 'Land phone must be 10 numbers'],
+        },
+      ],
+
+      mobile_phone: [
+        {
+          type: String,
+          trim: true,
+          minLength: [10, 'Phone number is too short (minimum is 10 characters)'],
+          maxLength: [10, 'Phone number is too long (maximum is 10 characters)'],
+          validate(_value) {
+            if (!_value.startsWith('05')) {
+              throw new Error(
+                'Invalid phone number format, required format: `05XXXXXXXX',
+              );
+            }
+          },
+        },
+      ],
+
+      fax_numbers: [
+        {
+          type: String,
+          trim: true,
+        },
+      ],
     },
 
     data_company_regions: [
@@ -116,11 +149,7 @@ const SCH_COMPANY = new mongoose.Schema(
     },
   },
 
-  {
-    timestamps: true,
-    collection: company.coll,
-  },
-
+  { timestamps: true, collection: data.company.coll },
   { toJSON: { virtuals: true }, toObject: { virtuals: true } },
 
   // ------ END ------ //
