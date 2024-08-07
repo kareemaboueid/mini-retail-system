@@ -13,16 +13,16 @@ import helmet from 'helmet';
 import mongoose from 'mongoose';
 
 // ROUTERS:
-import RT_USER from './src/module-User/routes/user.router.js';
+import RT_USER from './app/User/routes/user.router.js';
 
 // MIDDLEWARES:
 import mdwr_handle_error from './middlewares/handle_errors.mdwr.js';
 
 // CONFIGS & DB:
-import db_connect from './database/connect.db.js';
-import cnfg_server_listen from './configs/server_listen.cnfg.js';
-import { PORT, NODE_ENV } from './configs/env.cnfg.js';
+import db_connect from './configs/db/connect.db.js';
+import cnfg_server_listen from './configs/server/server_listen.cnfg.js';
 import cnst_paths_strings from './constants/paths_strings.cnst.js';
+import { PORT, NODE_ENV } from './configs/env/env.cnfg.js';
 
 // SERVER INITIALIZATION:
 const app = express();

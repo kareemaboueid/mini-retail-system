@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 import * as EmailValidator from 'email-validator';
-import { user } from '../../../database/structure.db.js';
+import cnst_db_strings from '../../../constants/db_strings.cnst.js';
+
+const data = cnst_db_strings();
 
 /** ### User schema */
 const SCH_USER = new mongoose.Schema(
@@ -116,7 +118,7 @@ const SCH_USER = new mongoose.Schema(
 
   {
     timestamps: true,
-    collection: user.coll,
+    collection: data.user.coll,
   },
 
   { toJSON: { virtuals: true }, toObject: { virtuals: true } },

@@ -1,8 +1,10 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import sch_user from '../schemas/user.schema.js';
-import { user } from '../../../database/structure.db.js';
-import { SALT_ROUNDS } from '../../../configs/env.cnfg.js';
+import cnst_db_strings from '../../../constants/db_strings.cnst.js';
+import { SALT_ROUNDS } from '../../../configs/env/env.cnfg.js';
+
+const data = cnst_db_strings();
 
 // bcrypt password before saving:
 sch_user.pre('save', async function (next) {
@@ -27,10 +29,10 @@ sch_user.methods.validate_password = async function (_entered_password) {
 // get user exluding one field or many fields:
 sch_user.methods.exclude = async function (_field) {
   delete this.toObject()[_field];
-  return user;
+  return this;
 };
 
 /** ### USER MODEL */
-const MDL_USER = mongoose.model(user.model, sch_user);
+const MDL_USER = mongoose.model(data.user.model, sch_user);
 
 export default MDL_USER;

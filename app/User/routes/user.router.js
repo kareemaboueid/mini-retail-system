@@ -6,7 +6,9 @@ import CTRL_USER_GET from '../controllers/user_get.ctrl.js';
 // import CTRL_USER_PASSWORD_UPDATE from '../controllers/user/user_password_update.ctrl.js';
 // import CTRL_USER_FREEZE from '../controllers/user/user_freeze.ctrl.js';
 import authenticate_route from '../../../middlewares/authenticate_route.mdwr.js';
-import { user } from '../../../configs/endpoints.cnfg.js';
+import cnst_paths_strings from '../../../constants/paths_strings.cnst.js';
+
+const path = cnst_paths_strings();
 
 /**
  * ## USER ROUTER
@@ -21,7 +23,7 @@ import { user } from '../../../configs/endpoints.cnfg.js';
 const RT_USER = express.Router();
 
 // POST /v1/users/create
-RT_USER.post(user.create, CTRL_USER_CREATE);
+RT_USER.post(path.user.create, CTRL_USER_CREATE);
 
 // POST /v1/users/login
 // RT_USER.post(user.login, CTRL_USER_LOGIN);
@@ -30,7 +32,7 @@ RT_USER.post(user.create, CTRL_USER_CREATE);
 // RT_USER.post(user.logout, CTRL_USER_LOGOUT);
 
 // GET /v1/users/:username
-RT_USER.get(user.username, authenticate_route, CTRL_USER_GET);
+RT_USER.get(path.user.username, authenticate_route, CTRL_USER_GET);
 
 // // PATCH /v1/users/:username?update=password
 // RT_USER.patch(user.username, authenticate_route,CTRL_USER_PASSWORD_UPDATE);

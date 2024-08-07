@@ -1,7 +1,7 @@
 import asyncHandler from 'express-async-handler';
 import { StatusCodes } from 'http-status-codes';
 import MDL_USER from '../models/user.model.js';
-import hlp_jsend from '../../../helpers/jsend.hlp.js';
+import hlp_jsend from '../../../utilities/jsend.utl.js';
 
 /**
  * ### Controller: CTRL_USER_GET

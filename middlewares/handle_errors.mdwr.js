@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import hlp_error_send from '../helpers/error_send.hlp.js';
+import hlp_error_send from '../utilities/error_send.utl.js';
 
 /**
  * ### Middleware for handling errors.
