@@ -9,67 +9,101 @@ const SCH_COMPANY = new mongoose.Schema(
   // ------ START ------ //
 
   {
-    data_company_legal_name: {
+    COMPANY_CODE: {
+      type: String,
+    },
+
+    COMPANY_LOGO: {
+      type: String,
+      trim: true,
+    },
+
+    COMPANY_NAME: {
       type: String,
       required: true,
       trim: true,
     },
 
-    data_company_business_entity: {
-      type: String,
-      trim: true,
-    },
+    COMPANY_COMMERCIAL_REGISTER: {
+      COMMERCIAL_NAME: {
+        type: String,
+        trim: true,
+      },
 
-    data_company_national_address: {
-      city: {
+      BUSINESS_ENTITY: {
         type: String,
         trim: true,
       },
-      district: {
-        type: String,
-        trim: true,
-      },
-      street: {
-        type: String,
-        trim: true,
-      },
-      postal_code: {
-        type: String,
-        trim: true,
-      },
-      building_number: {
-        type: String,
-        trim: true,
-      },
-    },
 
-    data_company_crn: {
-      number: {
+      ACTIVITY: {
+        type: String,
+        trim: true,
+      },
+
+      MANAGEMENT: [
+        {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: 'User',
+        },
+      ],
+
+      CRN: {
         type: String,
         trim: true,
         minlength: [10, 'Commercial register must be 10 numbers'],
         maxlength: [10, 'Commercial register must be 10 numbers'],
       },
-      issue_date: {
+
+      ISSUE_DATE: {
         type: Date,
       },
-      expiration_date: {
+
+      EXPIRATION_DATE: {
         type: Date,
       },
     },
 
-    data_company_tin: {
-      type: String,
-      trim: true,
-      minlength: [15, 'Tax ID number must be 15 numbers'],
-      maxlength: [15, 'Tax ID number must be 15 numbers'],
-      validate: {
-        validator: (v) => v.endsWith('3'),
-        message: (props) => `${props.value} is not a valid tax ID number`,
+    COMPANY_NATIONAL_ADDRESS: {
+      CITY: {
+        type: String,
+        trim: true,
+      },
+
+      DISTRICT: {
+        type: String,
+        trim: true,
+      },
+
+      STREET: {
+        type: String,
+        trim: true,
+      },
+
+      POSTAL_CODE: {
+        type: String,
+        trim: true,
+      },
+
+      BUILDING_NUMBER: {
+        type: String,
+        trim: true,
       },
     },
 
-    data_company_unified_number: {
+    COMPANY_TAX_REGISTER: {
+      TIN: {
+        type: String,
+        trim: true,
+        minlength: [15, 'Tax ID number must be 15 numbers'],
+        maxlength: [15, 'Tax ID number must be 15 numbers'],
+        validate: {
+          validator: (v) => v.endsWith('3'),
+          message: (props) => `${props.value} is not a valid tax ID number`,
+        },
+      },
+    },
+
+    COMPANY_UNIFIED_NUMBER: {
       type: String,
       trim: true,
       minlength: [10, 'Unified national number must be 10 numbers'],
@@ -80,8 +114,8 @@ const SCH_COMPANY = new mongoose.Schema(
       },
     },
 
-    data_company_contact_info: {
-      email_addresses: [
+    COMPANY_CONTACT_INFO: {
+      EMAIL_ADDRESSES: [
         {
           type: String,
           trim: true,
@@ -92,7 +126,7 @@ const SCH_COMPANY = new mongoose.Schema(
         },
       ],
 
-      websites: [
+      WEBSITES: [
         {
           type: String,
           trim: true,
@@ -103,7 +137,7 @@ const SCH_COMPANY = new mongoose.Schema(
         },
       ],
 
-      land_phones: [
+      LAND_PHONES: [
         {
           type: String,
           trim: true,
@@ -112,7 +146,7 @@ const SCH_COMPANY = new mongoose.Schema(
         },
       ],
 
-      mobile_phone: [
+      MOBILE_PHONE: [
         {
           type: String,
           trim: true,
@@ -128,7 +162,7 @@ const SCH_COMPANY = new mongoose.Schema(
         },
       ],
 
-      fax_numbers: [
+      FAX_NUMBERS: [
         {
           type: String,
           trim: true,
@@ -136,14 +170,14 @@ const SCH_COMPANY = new mongoose.Schema(
       ],
     },
 
-    data_company_regions: [
+    COMPANY_REGIONS: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Region',
       },
     ],
 
-    flag_freeze: {
+    COMPANY_FLAG_FREEZE: {
       type: Boolean,
       default: false,
     },
