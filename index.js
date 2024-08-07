@@ -13,8 +13,7 @@ import helmet from 'helmet';
 import mongoose from 'mongoose';
 
 // ROUTERS:
-import RT_USER from './src/routes/user.router.js';
-// import RT_INVENTORY from './src/routes/inventory.router.js';
+import RT_USER from './src/module-User/routes/user.router.js';
 
 // MIDDLEWARES:
 import mdwr_handle_error from './middlewares/handle_errors.mdwr.js';
@@ -23,7 +22,7 @@ import mdwr_handle_error from './middlewares/handle_errors.mdwr.js';
 import db_connect from './database/connect.db.js';
 import cnfg_server_listen from './configs/server_listen.cnfg.js';
 import { PORT, NODE_ENV } from './configs/env.cnfg.js';
-import { user } from './configs/endpoints.cnfg.js';
+import cnst_paths_strings from './constants/paths_strings.cnst.js';
 
 // SERVER INITIALIZATION:
 const app = express();
@@ -39,12 +38,13 @@ app.use(helmet());
 app.use(cookieParser());
 if (NODE_ENV === 'development') app.use(morgan('dev'));
 if (NODE_ENV === 'development') mongoose.set('debug', true);
+// TODO [DEV] add development logger (by winston)
 
-// SANITIZE INPUTS:
+// PATHS:
+const path = cnst_paths_strings();
 
 // SERVER ROUTERS:
-app.use(user.root, RT_USER);
-// app.use('/v1/inventory', RT_INVENTORY);
+app.use(path.user.root, RT_USER);
 
 // ERROR HANDLING:
 app.use(mdwr_handle_error);
