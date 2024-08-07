@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-import { NODE_ENV } from './env.cnfg.js';
+import { NODE_ENV } from '../env/env.cnfg.js';
 
 /**
  * ### Sets up the server to listen on the specified port.

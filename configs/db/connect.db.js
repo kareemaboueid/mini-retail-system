@@ -5,7 +5,7 @@ import {
   DB_PASSWORD,
   DB_CLOUD_REAL,
   DB_CLOUD_TEST,
-} from '../configs/env.cnfg.js';
+} from '../env/env.cnfg.js';
 
 /** ### Connects to the MongoDB Atlas database using the provided MongoDB URI. */
 const db_connect = async () => {

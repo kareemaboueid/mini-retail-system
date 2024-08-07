@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { NODE_ENV } from '../configs/env.cnfg.js';
+import { NODE_ENV } from '../env/env.cnfg.js';
 
 /**
  * ### Sets up a MongoDB connection using the provided MongoDB URI via `mongoose.connect()` method.
