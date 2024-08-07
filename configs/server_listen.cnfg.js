@@ -13,6 +13,7 @@ const cnfg_server_listen = (_app, _port) => {
 
     _app.listen(Number(_port), () => {
       if (NODE_ENV === 'development') {
+        // TODO [DEV] add development logger (by winston)
         console.log(`NODE_ENV: ${NODE_ENV}`);
         console.log(`SERVER LISTENING: PORT: ${_port} | HOST: http://localhost:${_port}`);
       }
