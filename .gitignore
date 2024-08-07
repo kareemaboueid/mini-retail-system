@@ -25,6 +25,7 @@ quick-save
 *.suo
 _dev
 *.env
+*.txt
 .env
 *.ntvs*
 *.njsproj
